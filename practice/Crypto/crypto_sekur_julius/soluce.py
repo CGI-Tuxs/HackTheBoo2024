@@ -1,0 +1,20 @@
+import re
+
+def decrypt(msg,shift=0):
+    result = ""
+    for c in msg:
+        if c == '0':
+            result += ' '
+        elif not ord('A') <= ord(c) <= ord('Z'):
+            result += c
+        else:
+            result += chr(65 + (ord(c)+shift)%26)
+    return result
+
+CIPHER = open('output.txt').read()
+#CIPHER="LTARDBT0ID0WPRZIWTQDD0ILDIWDJHPCSILTCINUDJG!0IWXH0XH0P0EGDDU0DU0RDCRTEI0ID0EGDKT0NDJ0IWPI0IWT0RPTHPG0RXEWTG0XH0XCHTRJGT0CD0BPIITG0WDL0BPCN0IXBTH0NDJ0PEEAN0XI.0IWT0HTRJGXIN0DU0P0IWDJHPCS0SXHIXCRI0HWXUIH0XH0TKTCIJPAAN0IWT0HPBT0PH0IWPI0DU0P0HXCVAT0HWXUI.0TCDJVW0BJBQAXCV,0IPZT0NDJG0UAPV0PCS0TCYDN0IWT0GTHI0DU0IWT0RDCITHI.0BPZT0HJGT0NDJ0LGPE0IWT0UDAADLXCV0ITMI0LXIW0IWT0WIQ0UAPV0UDGBPI0HTRJGXINDUPIWDJHPCSDGHTRJGXINDUPHXCVAT."
+
+for i in range(26):
+    result = decrypt(CIPHER,i)
+    if re.match(r'.* FLAG .*',result):
+        print("shift de ",i," : ",result)
